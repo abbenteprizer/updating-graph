@@ -1,9 +1,10 @@
 # Automatically updating matplotlib script for python 
 There are two ways of using this program:
-1: Send the program the data you want to display (using the flag -p)
-As it is now, filtering data to view is done inside 
+## 1: Send the program lists of data you want to display (using the flag -p)
 
-## Uses following arguments 
+## 2: Filter data inside of updating_graph
+
+## Use following arguments 
 -f, --input_file\
 -p, --print_mode\
 -w, --windowsize\
