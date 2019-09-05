@@ -11,6 +11,7 @@ Can automatically update graph depending on the graph-mode chosen as input
 
 ### add argument to program ###
 parser = argparse.ArgumentParser()
+parser.add_argument("-p", "--print_data")
 parser.add_argument("-f", "--input_file")
 parser.add_argument("-p", "--print_mode")
 parser.add_argument("-w", "--windowsize")
@@ -21,8 +22,10 @@ args = parser.parse_args()
 # when print_mode is 1, graph continuously updates and shows all values 
 # when print_mode is 2, graph shows all values, never updates graph
 
-### set file to read from ###
-if int(args.file) > 0:
+### set input data ###
+if int(args.print_data) > 0:
+	print_data = int(args.print_data)
+else if int(args.file) > 0:
 	input_file = int(args.input_file)
 else:
 	print("no input_file given, set file with -f flag, terminating")
