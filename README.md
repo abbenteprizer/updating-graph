@@ -1,9 +1,7 @@
 # Automatically updating matplotlib script for python 
-There are two ways of using this program:
+This program continuously reads from a file which contains raw data. Raw data can be continuously appended to the file from another program. The raw data needs to filtered in order to extract important data that one wants to display. This has to be implemented manually. 
 
-1: Send the program lists of data you want to display (using the flag -l)
-
-2: Filter data inside of updating_graph (using the flag -f)
+This is not a program that works for a general case, but rather, it is a program that can easily be modified to filter and display application specific data. The program is not designed to work unless you provide data filtering and raw input data. 
 
 ## Use following arguments 
 -l, --input_list\

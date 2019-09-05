@@ -11,7 +11,6 @@ Can automatically update graph depending on the graph-mode chosen as input
 
 ### add argument to program ###
 parser = argparse.ArgumentParser()
-parser.add_argument("-p", "--print_data")
 parser.add_argument("-f", "--input_file")
 parser.add_argument("-p", "--print_mode")
 parser.add_argument("-w", "--windowsize")
@@ -23,9 +22,7 @@ args = parser.parse_args()
 # when print_mode is 2, graph shows all values, never updates graph
 
 ### set input data ###
-if int(args.print_data) > 0:
-	print_data = int(args.print_data)
-else if int(args.file) > 0:
+if int(args.file) > 0:
 	input_file = int(args.input_file)
 else:
 	print("no input_file given, set file with -f flag, terminating")
@@ -55,7 +52,6 @@ def animate(i):
 	### initialize variables ###
 
 
-
 	### Filter the data ###
 
 	# Example;
@@ -67,12 +63,14 @@ def animate(i):
 	# 		list2[total_pdr_counter] = [data[1],0]
 
 
-	### store data you want to plot in variable print_data_list ###
-	# print_data_list = ???
+	### store data you want to plot in variable print_list ###
+	# print_list = 
 
 	### set printing boundaries, and printouts ###
-	x_lower = len(print_data_list) - windowsize
-	x_higher = len(print_data_list) - 1
+	print_length = len(print_list)
+
+	x_lower = len(print_list) - windowsize
+	x_higher = len(print_list) - 1
 	y_lower = 0 # put something here
 	y_higher = 100 # put something here
 
@@ -82,9 +80,9 @@ def animate(i):
 
 	### print automatically with moving window ###
 	if print_mode == 0:
-		if len(print_data_list) > windowsize:
-			x = range(len(print_data_list)- windowsize, len(print_data_list))
-			y = print_data_list[-windowsize:]
+		if len(print_list) > windowsize:
+			x = range(print_length - windowsize, print_length)
+			y = print_list[-windowsize:]
 			ax1.clear()
 			plt.axis([x_lower, x_higher, y_lower, y_higher])
 			ax1.set_ylabel(x_label) 
