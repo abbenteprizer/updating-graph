@@ -22,8 +22,8 @@ args = parser.parse_args()
 # when print_mode is 2, graph shows all values, never updates graph
 
 ### set input data ###
-if int(args.file) > 0:
-	input_file = int(args.input_file)
+if args.input_file != '':
+	input_file = args.input_file
 else:
 	print("no input_file given, set file with -f flag, terminating")
 	exit()
@@ -50,43 +50,42 @@ def animate(i):
 	    lines = file.read().splitlines()
 
 	### initialize variables ###
-
+	my_data_list = []
 
 	### Filter the data ###
 
 	# Example;
-	# for index, line in enumerate(lines):
-	# 	data = line.split(' ')
-	# 	if data[0] == 'foo':
-	# 		list1.append(data[2])
-	# 	if data[0] == 'bar':
-	# 		list2[total_pdr_counter] = [data[1],0]
-
+	for index, line in enumerate(lines):
+		data = line.split(' ')
+		if data[0] == 'my_data_is':
+			my_data_list.append(data[1])
 
 	### store data you want to plot in variable print_list ###
-	# print_list = 
+	print_list = my_data_list
+	# print(print_list)
 
 	### set printing boundaries, and printouts ###
 	print_length = len(print_list)
+	x_lower = 0
+	x_higher = 20
+	y_lower = 0 
+	y_higher = 40 
 
-	x_lower = len(print_list) - windowsize
-	x_higher = len(print_list) - 1
-	y_lower = 0 # put something here
-	y_higher = 100 # put something here
-
-	x_label = 'Number of experiments'
+	x_label = 'Measurement'
 	y_label = 'Times in ms'
 
 
 	### print automatically with moving window ###
 	if print_mode == 0:
 		if len(print_list) > windowsize:
+			x_lower = len(print_list) - windowsize
+			x_higher = len(print_list) - 1
 			x = range(print_length - windowsize, print_length)
 			y = print_list[-windowsize:]
 			ax1.clear()
-			plt.axis([x_lower, x_higher, y_lower, y_higher])
-			ax1.set_ylabel(x_label) 
-			ax1.set_xlabel(y_label)
+			ax1.set(xlim=(x_lower, x_higher), ylim=(y_lower, y_higher))
+			ax1.set_xlabel(x_label)
+			ax1.set_ylabel(y_label) 
 			ax1.plot(x, y, marker='o', color='blue')
 
 			# for item in special_data: # print the vertical lines for special events
@@ -95,12 +94,14 @@ def animate(i):
 	
 	### print everything automatically ###
 	elif print_mode == 1:
-		x = range(0,len(pdr_list))
-		y = pdr_list
+		x = range(0, print_length)
+		y = print_list
 		ax1.clear()
-		plt.axis([x_lower, x_higher, y_lower, y_higher])
-		ax1.set_ylabel(x_label) 
-		ax1.set_xlabel(y_label)
+		# plt.axis([x_lower, x_higher, y_lower, y_higher])
+		ax1.set(xlim=(x_lower, x_higher), ylim=(y_lower, y_higher))
+		# print(y)
+		# ax1.set_xlabel(x_label) 
+		# ax1.set_ylabel(y_label)
 		ax1.plot(x, y, marker='o', color='blue', markersize=3)
 
 		# for item in special_data: # print the vertical lines for special events
@@ -110,12 +111,12 @@ def animate(i):
 
 	### Print everything once ###
 	else:
-		x = range(0,len(pdr_list))
-		y = pdr_list
+		x = range(0, print_length)
+		y = print_list
 		ax1.clear()
 		plt.axis([x_lower, x_higher, y_lower, y_higher])
-		ax1.set_ylabel(x_label) 
-		ax1.set_xlabel(y_label)
+		ax1.set_xlabel(x_label) 
+		ax1.set_ylabel(y_label)
 		ax1.plot(x, y, marker='o', color='blue', markersize=3)
 
 		# for item in special_data: # print the vertical lines for special events
