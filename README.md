@@ -13,8 +13,8 @@ python3 updating_graph.py -f 'data.csv' -p 0 -w 10
 '''
 
 ## Printmodes
-print_mode = 0, graph continuously updates values using a window\
-print_mode = 1, graph continuously updates and shows all values \
-print_mode = 2, graph shows all values, never updates \
+print_mode = 0,	graph continuously updates values using a window \
+print_mode = 1,	graph continuously updates and shows all values \
+print_mode = 2,	graph shows all values, never updates 
 
 ## Examples
